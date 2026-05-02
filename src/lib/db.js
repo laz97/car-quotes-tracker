@@ -38,6 +38,28 @@ export async function getLendingQuotesForCar(carQuoteId) {
   return data
 }
 
+export async function updateCarQuote(id, data) {
+  const { data: row, error } = await supabase
+    .from('car_quotes')
+    .update(data)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return row
+}
+
+export async function updateLendingQuote(id, data) {
+  const { data: row, error } = await supabase
+    .from('lending_quotes')
+    .update(data)
+    .eq('id', id)
+    .select()
+    .single()
+  if (error) throw error
+  return row
+}
+
 export async function deleteCarQuote(id) {
   const { error } = await supabase
     .from('car_quotes')
